@@ -17,4 +17,8 @@ class Car {
         distance += 1;
     }
   }
+
+  void reset() {
+    distance = 0;
+  }
 }
