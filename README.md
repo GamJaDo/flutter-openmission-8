@@ -1,5 +1,9 @@
 # flutter-openmission-8
 
+# racingcar를 flutter를 이용해 앱으로 만들어보기
+
+---
+
 # 구현할 기능 목록
 
 ---
