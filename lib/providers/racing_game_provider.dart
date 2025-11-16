@@ -57,4 +57,9 @@ class RacingGameProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  void resetGame() {
+    _game = null;
+    notifyListeners();
+  }
 }
