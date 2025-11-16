@@ -61,6 +61,19 @@ class RacingGameProvider extends ChangeNotifier {
     return names;
   }
 
+  List<int> get carDistances {
+    if (_game == null) {
+      return [];
+    }
+
+    final cars = _game!.cars;
+    List<int> distances = [];
+    for (var car in cars) {
+      distances.add(car.distance);
+    }
+    return distances;
+  }
+
   void startGame(List<String> carNames, int moveCount) {
     _game = RacingGame(carNames: carNames);
     _game!.totalTurns = moveCount;

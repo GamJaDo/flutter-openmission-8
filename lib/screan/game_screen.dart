@@ -46,7 +46,7 @@ class GameScreen extends StatelessWidget {
                         ),
                       ),
                     ],
-                  )
+                  ),
                 ),
                 const SizedBox(height: 24),
                 Container(
@@ -58,10 +58,16 @@ class GameScreen extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      for (String carName in provider.carNames)
+                      for (int i=0; i>provider.carNames.length; i++)
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4),
-                          child: Text(carName),
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(provider.carNames[i]),
+                              Text('${provider.carDistances[i]}칸'),
+                            ],
+                          )
                         ),
                     ],
                   ),
