@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_openmission_8_racingcar/providers/racing_game_provider.dart';
 import 'package:flutter_openmission_8_racingcar/screan/home_screen.dart';
+import 'package:flutter_openmission_8_racingcar/screan/input_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -38,7 +39,7 @@ class RacingCarHome extends StatelessWidget {
         if (!provider.isGameStarted) {
           return const HomeScreen();
         }
-        return const HomeScreen();
+        return const InputScreen();
       },
     );
   }
