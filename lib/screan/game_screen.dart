@@ -26,18 +26,24 @@ class GameScreen extends StatelessWidget {
                     color: Colors.blue[50],
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Text(
-                    '턴: ${provider.currentTurn} / ${provider.totalTurns}',
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '턴: ${provider.currentTurn} / ${provider.totalTurns}',
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  )
                 ),
               ],
-            )
+            ),
           );
-        }
+        },
       ),
     );
   }

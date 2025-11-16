@@ -50,4 +50,11 @@ class RacingGame {
   bool isFinished() {
     return currentTurn >= totalTurns;
   }
+
+  double getProgress() {
+    if (totalTurns == 0) {
+      return 0.0;
+    }
+    return (currentTurn / totalTurns).clamp(0.0, 1.0);
+  }
 }

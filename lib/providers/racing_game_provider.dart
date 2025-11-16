@@ -41,6 +41,13 @@ class RacingGameProvider extends ChangeNotifier {
     return _game!.winners;
   }
 
+  double get progress {
+    if (_game == null) {
+      return 0.0;
+    }
+    return _game!.getProgress();
+  }
+
   void startGame(List<String> carNames, int moveCount) {
     _game = RacingGame(carNames: carNames);
     _game!.totalTurns = moveCount;
