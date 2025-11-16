@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_openmission_8_racingcar/models/racing_game.dart';
+import 'package:flutter_openmission_8_racingcar/utils/constants.dart';
 
 class RacingGameProvider extends ChangeNotifier {
   RacingGame? _game;
@@ -61,5 +62,14 @@ class RacingGameProvider extends ChangeNotifier {
   void resetGame() {
     _game = null;
     notifyListeners();
+  }
+
+  String? validateCarName(String name) {
+    if (name.isEmpty) {
+      return Constants.emptyCarNameError;
+    }
+    if (name.length > Constants.maxCarNameLength) {
+      return Constants.carNameTooLongError;
+    }
   }
 }
