@@ -26,6 +26,20 @@ class RacingGameProvider extends ChangeNotifier {
     return _game!.totalTurns;
   }
 
+  bool get isGameFinished {
+    if (_game == null) {
+      return false;
+    }
+    return _game!.isFinished();
+  }
+
+  List<String> get winners {
+    if (_game == null) {
+      return [];
+    }
+    return _game!.winners;
+  }
+
   void startGame(List<String> carNames, int moveCount) {
     _game = RacingGame(carNames: carNames);
     _game!.totalTurns = moveCount;
@@ -33,8 +47,13 @@ class RacingGameProvider extends ChangeNotifier {
   }
 
   void playTurn() {
-    if (_game != null && _game!.currentTurn < _game!.totalTurns) {
+    if (_game != null && !_game!.isFinished()) {
       _game!.playTurn();
+
+      if (_game!.isFinished()) {
+        _game!.determineWinners();
+      }
+
       notifyListeners();
     }
   }

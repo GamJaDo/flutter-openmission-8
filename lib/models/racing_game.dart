@@ -46,4 +46,8 @@ class RacingGame {
     int maxDistance = findMaxDistance(cars);
     winners = findWinners(cars, maxDistance);
   }
+
+  bool isFinished() {
+    return currentTurn >= totalTurns;
+  }
 }
