@@ -8,4 +8,6 @@ class Constants {
 
   static const String emptyCarNameError = '자동차 이름을 입력해야 합니다.';
   static const String carNameTooLongError = '자동차 이름은 5자 이하여야 합니다.';
+  static const String invalidMoveCountError = '이동 횟수는 숫자만 입력해야 합니다.';
+  static const String moveCountTooSmallError = '이동 횟수는 1 이상이어야 합니다.';
 }

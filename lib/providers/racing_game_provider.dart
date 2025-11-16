@@ -72,4 +72,19 @@ class RacingGameProvider extends ChangeNotifier {
       return Constants.carNameTooLongError;
     }
   }
+
+  String? validateMoveCount(String count) {
+    if (count.isEmpty) {
+      return Constants.emptyCarNameError;
+    }
+    if (!RegExp(r'[0-9]+$').hasMatch(count)) {
+      return Constants.invalidMoveCountError;
+    }
+
+    int? value = int.tryParse(count);
+    if (value == null || value < 1) {
+      return Constants.moveCountTooSmallError;
+    }
+    return null;
+  }
 }
