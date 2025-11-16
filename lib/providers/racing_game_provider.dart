@@ -31,4 +31,11 @@ class RacingGameProvider extends ChangeNotifier {
     _game!.totalTurns = moveCount;
     notifyListeners();
   }
+
+  void playTurn() {
+    if (_game != null && _game!.currentTurn < _game!.totalTurns) {
+      _game!.playTurn();
+      notifyListeners();
+    }
+  }
 }
