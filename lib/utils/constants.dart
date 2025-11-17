@@ -17,6 +17,9 @@ class Constants {
   static const String carNameHint = '5자리 이하';
   static const String moveCountHint = '1이상 입력';
   static const String executionResult = '실행 결과';
+  static const String raceComplete = '경주 완료';
+  static const String winnerSign = '우승자: ';
+  static const String retryButton = '다시하기';
 
   static const String emptyCarNameError = '자동차 이름을 입력해야 합니다.';
   static const String carNameTooLongError = '자동차 이름은 5자 이하여야 합니다.';
