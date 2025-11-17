@@ -58,16 +58,18 @@ class GameScreen extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      for (int i=0; i>provider.carNames.length; i++)
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(provider.carNames[i]),
-                              Text('${provider.carDistances[i]}칸'),
-                            ],
-                          )
+                      const Text(
+                        Constants.executionResult,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      for (int i=0; i<provider.carNames.length; i++)
+                        _buildCarRow(
+                          provider.carNames[i],
+                          provider.carDistances[i],
                         ),
                     ],
                   ),
@@ -76,6 +78,61 @@ class GameScreen extends StatelessWidget {
             ),
           );
         },
+      ),
+    );
+  }
+
+  Widget _buildCarRow(String carName, int distance) {
+    return Container(
+      height: Constants.carRowHeight,
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 80,
+            child: Text(
+              carName, style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          Expanded(
+            child: Stack(
+              children: [
+                Row(
+                  children: List.generate(
+                    15, (index) => Expanded(
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 1),
+                        height: 2,
+                        color: Colors.grey[300],
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  left: distance / Constants.progressBarUnit.toDouble(),
+                  top: 20,
+                  child: const Icon(
+                    Icons.directions_car,
+                    color: Colors.red,
+                    size: Constants.carIconSize,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            width: 50,
+            child: Text(
+              '$distance칸',
+              style: const TextStyle(fontSize: 14),
+              textAlign: TextAlign.right,
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -50,8 +50,8 @@ class _InputScreenState extends State<InputScreen> {
 
     if (hasError) {
       setState(() {});
+      return;
     }
-    return;
 
     List<String> carNames = [];
     for (var controller in carNameControllers) {

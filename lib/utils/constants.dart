@@ -8,11 +8,15 @@ class Constants {
 
   static const double defaultPadding = 16.0;
   static const double buttonHeight = 50.0;
+  static const double carIconSize = 40;
+  static const double carRowHeight = 80;
+  static const double progressBarUnit = 15;
 
   static const String startGameBuuton = '게임 시작';
   static const String racingButton = 'Racing';
   static const String carNameHint = '5자리 이하';
   static const String moveCountHint = '1이상 입력';
+  static const String executionResult = '실행 결과';
 
   static const String emptyCarNameError = '자동차 이름을 입력해야 합니다.';
   static const String carNameTooLongError = '자동차 이름은 5자 이하여야 합니다.';
