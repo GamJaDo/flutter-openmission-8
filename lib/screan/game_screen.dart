@@ -2,9 +2,42 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_openmission_8_racingcar/providers/racing_game_provider.dart';
 import 'package:flutter_openmission_8_racingcar/utils/constants.dart';
+import 'dart:async';
 
-class GameScreen extends StatelessWidget {
+class GameScreen extends StatefulWidget {
   const GameScreen({Key? key}) : super(key: key);
+
+  @override
+  State<GameScreen> createState() => _GameScreenState();
+}
+
+class _GameScreenState extends State<GameScreen> {
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _startPlay();
+  }
+
+  void _startPlay() {
+    _timer = Timer.periodic(
+      const Duration(milliseconds: Constants.playIntervalMs), (_) {
+        final provider = context.read<RacingGameProvider>();
+        if (!provider.isGameFinished) {
+          provider.playTurn();
+        } else {
+          _timer?.cancel();
+        }
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
