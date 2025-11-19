@@ -2,6 +2,9 @@
 
 # racingcar를 flutter를 이용해 앱으로 만들어보기
 
+# 시연 영상 & apk
+ - https://midi-homegrown-af8.notion.site/8-2b0a461348ea80c8b8bff41bb4db30c8?source=copy_link
+
 ---
 
 # 구현할 기능 목록
