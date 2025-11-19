@@ -34,6 +34,25 @@ class ResultScreen extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
+                const SizedBox(height: 48),
+                SizedBox(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      context.read<RacingGameProvider>().resetGame();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                    ),
+                    child: const Text(
+                      Constants.retryButton,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           );

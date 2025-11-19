@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            context.read<RacingGameProvider>().startGame([], 0);
+            context.read<RacingGameProvider>().startInputScreen();
           },
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),

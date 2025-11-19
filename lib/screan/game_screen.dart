@@ -24,10 +24,15 @@ class _GameScreenState extends State<GameScreen> {
     _timer = Timer.periodic(
       const Duration(milliseconds: Constants.playIntervalMs), (_) {
         final provider = context.read<RacingGameProvider>();
-        if (!provider.isGameFinished) {
+
+        if (provider.currentTurn < provider.totalTurns) {
           provider.playTurn();
         } else {
           _timer?.cancel();
+
+          Future.delayed(const Duration(seconds: 2), (){
+            provider.finishGameScreen();
+          });
         }
       },
     );
@@ -116,42 +121,52 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   Widget _buildCarRow(String carName, int distance) {
+    double progress = (distance / Constants.progressBarUnit).clamp(0.0, 1.0);
+
     return Container(
       height: Constants.carRowHeight,
       margin: const EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.blue),
+        borderRadius: BorderRadius.circular(8),
+      ),
       child: Row(
         children: [
           SizedBox(
-            width: 80,
+            width: 60,
             child: Text(
-              carName, style: const TextStyle(
-                fontSize: 16,
+              carName,style: const TextStyle(
+                fontSize: 14,
                 fontWeight: FontWeight.bold,
               ),
-              overflow: TextOverflow.ellipsis,
             ),
           ),
           Expanded(
             child: Stack(
               children: [
-                Row(
-                  children: List.generate(
-                    15, (index) => Expanded(
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 1),
-                        height: 2,
-                        color: Colors.grey[300],
-                      ),
-                    ),
+                Container(
+                  height: 30,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                ),
+                Container(
+                  height: 30,
+                  width: ((distance / Constants.progressBarUnit) * 300).clamp(0, 300),
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(4),
                   ),
                 ),
                 Positioned(
-                  left: distance / Constants.progressBarUnit.toDouble(),
-                  top: 20,
+                  left: (progress * 300) - 10,
+                  top: 5,
                   child: const Icon(
                     Icons.directions_car,
-                    color: Colors.red,
-                    size: Constants.carIconSize,
+                    color: Colors.black,
+                    size: 20,
                   ),
                 ),
               ],

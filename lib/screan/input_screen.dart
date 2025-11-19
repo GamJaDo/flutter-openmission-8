@@ -53,16 +53,12 @@ class _InputScreenState extends State<InputScreen> {
       return;
     }
 
-    List<String> carNames = [];
-    for (var controller in carNameControllers) {
-      carNames.add(controller.text);
-    }
-
-    String moveCountText = moveCountController.text;
-    int moveCount = int.parse(moveCountText);
+    List<String> carNames = carNameControllers
+      .map((controller) => controller.text.trim())
+      .toList();
+    int moveCount = int.parse(moveCountController.text.trim());
 
     provider.startGame(carNames, moveCount);
-    provider.playTurn();
   }
   
   @override

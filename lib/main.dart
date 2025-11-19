@@ -38,16 +38,19 @@ class RacingCarHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<RacingGameProvider>(
       builder: (context, provider, _) {
-        if (!provider.isGameStarted) {
-          return const HomeScreen();
+        if (provider.showGameScreen) {
+          return const GameScreen();
         }
+
         if (provider.isGameFinished) {
           return const ResultScreen();
         }
-        if (provider.currentTurn > 0) {
-          return const GameScreen();
+
+        if (provider.isReadyToInput) {
+          return const InputScreen();
         }
-        return const InputScreen();
+
+        return const HomeScreen();
       },
     );
   }

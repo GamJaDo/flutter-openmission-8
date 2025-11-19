@@ -4,9 +4,19 @@ import 'package:flutter_openmission_8_racingcar/utils/constants.dart';
 
 class RacingGameProvider extends ChangeNotifier {
   RacingGame? _game;
+  bool _isReadyToInput = false;
+  bool _showGameScreen = false;
 
   RacingGame? get game {
     return _game;
+  }
+
+  bool get isReadyToInput {
+    return _isReadyToInput;
+  }
+
+  bool get showGameScreen {
+    return _showGameScreen;
   }
 
   bool get isGameStarted {
@@ -74,26 +84,48 @@ class RacingGameProvider extends ChangeNotifier {
     return distances;
   }
 
+  void startInputScreen() {
+    _isReadyToInput = true;
+    notifyListeners();
+  }
+
   void startGame(List<String> carNames, int moveCount) {
+    if (carNames.isEmpty || moveCount <= 0) {
+      return;
+    }
     _game = RacingGame(carNames: carNames);
     _game!.totalTurns = moveCount;
+    _isReadyToInput = false;
+    _showGameScreen = true;
     notifyListeners();
   }
 
   void playTurn() {
-    if (_game != null && !_game!.isFinished()) {
-      _game!.playTurn();
-
-      if (_game!.isFinished()) {
-        _game!.determineWinners();
-      }
-
-      notifyListeners();
+    if (_game == null) {
+      return;
     }
+
+    if (_game!.isFinished()) {
+      return ;
+    }
+
+    _game!.playTurn();
+    if (_game!.isFinished()) {
+      _game!.determineWinners();
+    }
+
+    notifyListeners();
+  }
+
+  void finishGameScreen() {
+    _showGameScreen = false;
+    notifyListeners();
   }
 
   void resetGame() {
     _game = null;
+    _isReadyToInput = false;
+    _showGameScreen = false;
     notifyListeners();
   }
 
@@ -104,11 +136,12 @@ class RacingGameProvider extends ChangeNotifier {
     if (name.length > Constants.maxCarNameLength) {
       return Constants.carNameTooLongError;
     }
+    return null;
   }
 
   String? validateMoveCount(String count) {
     if (count.isEmpty) {
-      return Constants.emptyCarNameError;
+      return Constants.emptyMoveCountError;
     }
     if (!RegExp(r'[0-9]+$').hasMatch(count)) {
       return Constants.invalidMoveCountError;
